@@ -39,20 +39,15 @@ const Hero = () => {
     offset: ["start start", "end start"],
   });
 
-  // Screenshots: start very faint, become fully visible as you scroll
-  const screenshotsOpacity = useTransform(scrollYProgress, [0, 0.3, 0.6], [0.08, 0.4, 0.85]);
-  // Overlay fades out so screenshots become clearer
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.3, 0.6], [0.85, 0.4, 0]);
-  // BRANDCURE text fades out
-  const textOpacity = useTransform(scrollYProgress, [0, 0.25, 0.5], [1, 0.3, 0]);
-  const textScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.85]);
-  // Scroll indicator fades out quickly
-  const scrollIndicatorOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
+  const screenshotsOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.08, 0.5, 0.85]);
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.85, 0.3, 0]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.4, 0.8], [1, 0.3, 0]);
+  const textScale = useTransform(scrollYProgress, [0, 0.8], [1, 0.85]);
+  const scrollIndicatorOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
 
   return (
-    <section ref={sectionRef} className="relative flex min-h-[200vh] flex-col items-center overflow-hidden px-6">
-      {/* Sticky container */}
-      <div className="sticky top-0 flex min-h-screen w-full flex-col items-center justify-center">
+    <section ref={sectionRef} className="relative flex h-screen flex-col items-center overflow-hidden px-6">
+      <div className="flex h-full w-full flex-col items-center justify-center">
         {/* Scrolling website screenshots background */}
         <motion.div
           className="pointer-events-none absolute inset-0 flex flex-col justify-center gap-4"
