@@ -87,6 +87,16 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Scrolling marquee animations */
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes scroll-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 4px;
