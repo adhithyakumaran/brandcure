@@ -1,8 +1,52 @@
 import { motion } from "framer-motion";
 
+const websiteScreenshots = [
+  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
+  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
+  "https://images.unsplash.com/photo-1517292987719-0369a794ec0f?w=400&h=300&fit=crop",
+  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+  "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=400&h=300&fit=crop",
+  "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=300&fit=crop",
+  "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=400&h=300&fit=crop",
+  "https://images.unsplash.com/photo-1547658719-da2b51169166?w=400&h=300&fit=crop",
+  "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=300&fit=crop",
+  "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=400&h=300&fit=crop",
+  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=300&fit=crop",
+  "https://images.unsplash.com/photo-1542744094-24638eff58bb?w=400&h=300&fit=crop",
+];
+
+const ScrollingRow = ({ direction, speed, offset = 0 }: { direction: "left" | "right"; speed: number; offset?: number }) => {
+  const images = [...websiteScreenshots, ...websiteScreenshots];
+  return (
+    <div className="flex gap-4 whitespace-nowrap" style={{ 
+      animation: `scroll-${direction} ${speed}s linear infinite`,
+      animationDelay: `${offset}s`,
+    }}>
+      {images.map((src, i) => (
+        <div key={i} className="w-[280px] h-[180px] md:w-[340px] md:h-[220px] flex-shrink-0 rounded-lg overflow-hidden">
+          <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
+        </div>
+      ))}
+    </div>
+  );
+};
+
 const Hero = () => {
   return (
     <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6">
+      {/* Scrolling website screenshots background */}
+      <div className="pointer-events-none absolute inset-0 flex flex-col justify-center gap-4 opacity-[0.12]">
+        <ScrollingRow direction="left" speed={40} />
+        <ScrollingRow direction="right" speed={45} offset={-2} />
+        <ScrollingRow direction="left" speed={38} offset={-5} />
+        <ScrollingRow direction="right" speed={42} offset={-3} />
+        <ScrollingRow direction="left" speed={44} offset={-1} />
+      </div>
+
+      {/* Overlay gradient to fade edges */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background via-background/70 to-background" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background via-transparent to-background" />
+
       {/* Subtle background grain */}
       <div className="pointer-events-none absolute inset-0 opacity-[0.03]" style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
