@@ -1,5 +1,8 @@
+'use client';
+
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { ParticlesBackground } from "./ParticlesBackground";
 
 const services = [
   { title: "AI Ads", desc: "Performance-driven ad creatives powered by artificial intelligence." },
@@ -13,8 +16,13 @@ const Services = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="px-6 py-32 md:py-48" ref={ref}>
-      <div className="mx-auto max-w-6xl">
+    <section className="relative overflow-hidden px-6 py-32 md:py-48 bg-background" ref={ref}>
+      {/* 3D Particles Background */}
+      <div className="absolute inset-0 z-0 opacity-40">
+        <ParticlesBackground count={2000} color="#ffffff" />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-6xl">
         <motion.p
           className="font-body text-[10px] tracking-[0.4em] uppercase text-muted-foreground"
           initial={{ opacity: 0, y: 20 }}
@@ -37,7 +45,7 @@ const Services = () => {
           {services.map((service, i) => (
             <motion.div
               key={service.title}
-              className="group border-t border-border py-12 pr-12 cursor-pointer"
+              className="group border-t border-border py-12 pr-12 cursor-pointer bg-background/50 backdrop-blur-sm"
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 + i * 0.15 }}
