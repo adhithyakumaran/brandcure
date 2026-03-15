@@ -216,10 +216,11 @@ export default function Home() {
             { scale: .88, opacity: 0, y: 20 },
             { scale: 1, opacity: 1, y: 0, duration: .75, ease: 'back.out(1.7)' }
           );
-          gsap.to({ v: 0 }, {
+          const proxy = { v: 0 };
+          gsap.to(proxy, {
             v: target, duration: 1.8, ease: 'power2.out',
             onUpdate() {
-              const n = Math.round((this as gsap.core.Tween).targets()[0].v);
+              const n = Math.round(proxy.v);
               el.innerHTML = n + `<span class="sfx">${sfx}</span>`;
             },
             onComplete() {
